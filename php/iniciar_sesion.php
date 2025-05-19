@@ -4,50 +4,27 @@
     $usuario=limpiar_cadena($_POST['login_usuario']);
     $clave=limpiar_cadena($_POST['login_clave']);
 
+
+    #usuario y contraseña a comparar
+    $usuario_login = "sek";
+    $clave_login = "fuckthem"
     # Verificando campos obligatorios 
 
     if($usuario== "" || $clave==""){
         echo '
             <div class="notification is-danger is-light">
                 <strong>There was an unexpected error</strong><br>
-                You didnt fill in all required fields
+                no se ha ingresado el usuario o la contraseña
             </div>
             ';
         exit();
     }
 
-    # verificando integridad de los datos
+    
 
 
-    if(!verificar_datos("[a-zA-Z0-9]{4,20}", $usuario)){
 
-        echo '
-             <div class="notification is-danger is-light">
-                <strong>There was an unexpected error</strong><br>
-                The USER doesnt match with the required format.
-            </div>  
-        ';
-        exit();
-
-    }
-
-    if(!verificar_datos("[a-zA-Z0-9$@.-]{7,100}", $clave)){
-
-        echo '
-             <div class="notification is-danger is-light">
-                <strong>There was an unexpected error</strong><br>
-                The KEY doesnt match with the required format.
-            </div>  
-        ';
-        exit();
-
-    }
-
-    $check_user=conexion();
-
-    $check_user=$check_user->query("SELECT * FROM usuario WHERE usuario_usuario='$usuario'");
-
-    if($check_user->rowCount()==1){
+    if($usuario == ){
         $check_user=$check_user->fetch();
 
         if($check_user['usuario_usuario']== $usuario  && password_verify($clave, $check_user['usuario_clave'])){
